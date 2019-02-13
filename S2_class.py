@@ -3,7 +3,7 @@
 """
 Created on Wed Feb 13 13:37:42 2019
 
-@author: labuser
+@author: Kaushik Koneripalli
 """
 import networkx as nx
 import matplotlib.pyplot as plt
