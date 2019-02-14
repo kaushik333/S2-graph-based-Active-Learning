@@ -58,8 +58,8 @@ class S2(object):
             nx.draw_networkx_nodes(self.G, pos=pos, nodelist=list(self.queried_pts.keys()), node_size=50, node_color='b')
         
         # draw edges and the corresponding labels
+        print(len(self.G.edges()))
         nx.draw_networkx_edges(self.G, pos=pos)
-        
 #        nx.draw_networkx_labels(self.G, pos=pos, labels=labels, font_size=7)
         
         plt.axis('off')
@@ -107,6 +107,7 @@ class S2(object):
         if len(self.queried_pts)==self.budget:
             self.budget_flag=True
         else:
+            print("Cut edge : {}".format(self.shortest2_path))
             self.G.remove_edge(*tuple(self.shortest2_path))
         
     def perform_S2(self):
@@ -115,6 +116,7 @@ class S2(object):
         while(len(self.queried_pts)<=self.budget):
             self.find_shortest2_path()
             sp = self.shortest2_path
+            print("SP is {}".format(sp))
             if (sp is not None) and (not self.budget_flag):
                 self.find_cut_edge()
                 self.draw_binary_grid_graph(fig_num=i)
@@ -122,7 +124,9 @@ class S2(object):
                 self.pos_list = [self.shortest2_path[0]]
                 self.neg_list = [self.shortest2_path[1]]
             else:
-                self.budget_flag=False
+                if (sp is not None):
+                    self.budget_flag=False
+                    break
                 break
             
         if(self.budget_flag):
@@ -130,6 +134,6 @@ class S2(object):
         else:
             print("Found all cut edges!!!")
         
-S2_model = S2(nr=10, nc=25, ratio=0.5, budget=20)
+S2_model = S2(nr=10, nc=25, ratio=0.85, budget=40)
 S2_model.sample_graph()
 S2_model.perform_S2()
