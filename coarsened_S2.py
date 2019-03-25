@@ -3,7 +3,7 @@
 """
 Created on Mon Mar 25 09:59:58 2019
 
-@author: labuser
+@author: Kaushik Koneripalli
 """
 
 import networkx as nx
