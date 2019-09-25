@@ -49,25 +49,21 @@ for m in V:
   
     add edge between m and n if they share a k-hop neighbor
 
+### Instructions to run
 
-Here is a trial run of the algorithm when both classes have almost equal number of elements. A Low budget is provided where its not possible to "zip" through the whole decision boundary. After S2 is run, the obtained boundary is then passed onto a label completeion algorithm as described in the paper.  
+Run coarsened_S2.py
 
-![](gif1.gif)
+set level=0 to not perform coarsening and run vanilla S2
 
-Here is the trial run of the algorithm when one class has more number of elements compared to the other and you are given a high budget. Here the algorithm has high enough budget to "zip" through the whole decision boundary. 
+### Results
 
-![](gif2.gif)
+#### Coarsen level 5
+![](Coarsened_level_5.png) 
+![](Coarsened_S2_level_5.png) 
+![](predicted_level_5.png) 
 
-# Coarsened version of S2
+#### Coarsen level 10
+![](Coarsened_level_10.png) 
+![](Coarsened_S2_level_10.png) 
+![](predicted_level_10.png) 
 
-When the graph is very big, S2 algorithm does not get a complete picture of the decision boundary as it can tend it to be very myopic. This is illustrated by performing S2 on a graph and feeding it to a label-completeion algorithm such as the [ZLG](http://mlg.eng.cam.ac.uk/zoubin/papers/zgl.pdf). We can notice that the prediction of labels tends to be very uneven:
-
-![](S2_ZLG.png) 
-The series of blue dots indicate the queried points when S2 is performed. 
-
-The ground truth labelling is as below: 
-![](S2_gt.png)
-
-However, when we coarsened the graph by 3 levels in this case, we observe that the the labels output by ZLG is much closer to the ground-truth and consequently captures the decision boundary in a better fashion. Coarsening is a very useful strategy when the budget is very less. It helps to get a "broader" picture of the decision boundary:
-
-![](coarsened_S2_ZLG.png)
